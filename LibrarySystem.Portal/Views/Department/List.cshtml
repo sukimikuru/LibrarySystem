@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "~/_LAYOUTS/Master/Whole.cshtml";
+    ViewData["MainMenu"] = "Department";
+    ViewData["SubMenu"] = "";
+}
+
+<script type="text/javascript" src="~/_LAYOUTS/JS/Department/List.js"></script>
+
+<link rel="stylesheet" href="/theme/tree/css/demo.css" type="text/css">
+<link rel="stylesheet" href="/theme/tree/css/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="/theme/tree/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="/theme/tree/js/jquery.ztree.excheck-3.5.js"></script>
+
+<h3 class="page-title">
+    组织架构管理
+    <small>interactive tree view</small>
+</h3>
+
+
+<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" id="rMenu"
+    style="position:absolute;display:none;">
+    <li><a tabindex="-1" href="javascript:;" onclick="AddDept();">Add</a></li>
+    <li id="m_del"><a tabindex="-1" href="javascript:;" onclick="DeleteDept();">Delete</a></li>
+</ul>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="portlet yellow-lemon box">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>Contextual Menu with Drag & Drop
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"> </a>
+                    <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+                    <a href="javascript:;" class="reload"> </a>
+                    <a href="javascript:;" class="remove"> </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="tree_3" class="tree-demo">
+                    <ul id="tree" class="ztree" style="margin-left:20px;"></ul> 
+                </div>
+                <div class="alert alert-success no-margin margin-top-10"> Note! Opened and selected nodes will be saved in the user's browser, so when returning to the same tree the previous state will be restored. </div>
+            </div>
+        </div>
+    </div>
+
+</div>

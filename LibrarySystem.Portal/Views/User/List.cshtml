@@ -1,0 +1,95 @@
+﻿@using LibrarySystem.Entities
+@{
+    Layout = "~/_LAYOUTS/Master/Whole.cshtml";
+    ViewData["MainMenu"] = "User";
+    ViewData["SubMenu"] = "";
+}
+<link href="../assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="~/_LAYOUTS/JS/User/List.js"></script>
+
+
+<style type="text/css">
+    .help-block {
+        display: none;
+    }
+
+    .tables.actions .btn {
+        width: 90px;
+        margin: 0 5px;
+    }
+</style>
+
+
+
+
+<h3 class="page-title">
+    组织架构及用户
+    <small>组织架构管理 & 用户管理</small>
+</h3>
+
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-share font-dark"></i>
+                    <span class="caption-subject font-dark bold uppercase">组织架构</span>
+                </div>
+                <div class="actions">
+
+                    <a id="refresh-tree" class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                        <i class="icon-refresh"></i>
+                    </a>
+
+                    @*输入部门名称*@
+                    <a href="javascript:;" class="btn btn-circle btn-default tooltips" id="btn_departname" data-toggle="modal" data-target="#name_div" style="display:none">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="tree" class="tree-demo"> </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-dark">
+                    <i class="icon-settings font-dark"></i>
+                    <span class="caption-subject bold uppercase"><span id="user-list-pre" class="caption-subject bold uppercase"></span>用户列表</span>
+                </div>
+                <div class="tables actions">
+                    @*<div class="color-demo tooltips" data-original-title="Click to view demos for this color" data-toggle="modal" data-target="#user-detail-div"></div>*@
+                    <a class="btn btn-circle btn-default tooltips"  onclick="user.detail(this,0)" >
+                        <i class="fa fa-plus"></i> 新增
+                    </a>
+                    <a class="btn btn-circle btn-default tooltips" data-toggle="modal" data-target="#user-detail-div" style="display:none"></a>
+                    <a class="btn btn-circle btn-default" onclick="user.deleteUser(0)">
+                        <span class="md-click-circle md-click-animate" style="height: 69px; width: 69px; top: -18.5px; left: -2.765625px;"></span>
+                        <i class="fa fa-trash-o"></i> 删除
+                    </a>
+                    <a class="btn btn-circle btn-default" onclick="user.resetPwd(0)">
+                        <span class="md-click-circle md-click-animate" style="height: 69px; width: 69px; top: -18.5px; left: -2.765625px;"></span>
+                        <i class="fa fa-retweet"></i> 重置密码
+                    </a>
+                    
+                    <a id="refresh-table" class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                        <i class="icon-refresh"></i>
+                    </a>
+                    <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
+                </div>
+            </div>
+            <div class="portlet-body" id="table_div">
+
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>
+
+
+

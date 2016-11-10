@@ -1,0 +1,61 @@
+﻿@using LibrarySystem.Entities
+@{
+
+    List<ResEntity> resList = ViewData["resList"] as List<ResEntity>;
+}
+
+<table class="table table-striped table-bordered table-hover table-checkable order-column" id="table">
+    <thead>
+        <tr>
+            <th>
+                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                    <input type="checkbox" class="group-checkable" data-set="#table .checkboxes" />
+                    <span></span>
+                </label>
+            </th>
+            <th> 名称 </th>
+            <th> 资源类型 </th>
+            <th> 说明 </th>
+            <th> 操作 </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ResEntity item in resList)
+        {
+            <tr class="odd gradeX" tag-key="@item.RowKey">
+                <td>
+                    <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                        <input type="checkbox" class="checkboxes" value="@item.RowKey" />
+                        <span></span>
+                    </label>
+                </td>
+                <td> @item.Name </td>
+                <td> @(EnumHelper.Parse2EnumByDBCode<ResType>(item.Type).GetDisplayName()) </td>
+                <td> @item.Note </td>
+                <td>
+                    <div class="btn-group">
+                        <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                            编辑
+                            <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="javascript:;" onclick="res.detail(this,'@item.RowKey')">
+                                    <i class="icon-docs"></i> 修改
+                                </a>
+                                <a class="btn btn-circle btn-default tooltips" data-toggle="modal" data-target="#res-detail-div" style="display:none"></a>
+                            </li>
+                            <li>
+                                <a href="javascript:;"  onclick="res.deleteRes('@item.RowKey')">
+                                    <i class="icon-tag"></i> 删除
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

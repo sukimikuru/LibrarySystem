@@ -1,0 +1,237 @@
+﻿@using LibrarySystem.Portal.Classes;
+@using LibrarySystem.Entities;
+@using LibrarySystem.ResWeb;
+@{
+    Utility.CheckLoginStatus();
+    string CurrentMainMenuKey = ViewData["MainMenu"] as string;
+    string CurrentSubMenuKey = ViewData["SubMenu"] as string;
+}
+
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>图书管理系统</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+
+
+
+    <link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="../assets/global/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
+ 
+
+    <link href="../assets/global/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="../assets/global/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="../assets/layouts/layout/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/layouts/layout/css/themes/light.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="../assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
+
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <link href="../assets/global/plugins/jstree/dist/themes/default/style.css" rel="stylesheet" type="text/css" />
+
+
+
+    <!--[if lt IE 9]>
+    <script src="../assets/global/plugins/respond.min.js"></script>
+    <script src="../assets/global/plugins/excanvas.min.js"></script>
+    <![endif]-->
+
+    <script src="~/Theme/js/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="~/Theme/js/jquery.form.js" type="text/javascript"></script>
+
+    <script src="../assets/global/plugins/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+   
+
+    <script src="../assets/global/plugins/morris/morris.min.js" type="text/javascript"></script>
+    
+
+
+
+    <script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+
+    <script src="../assets/global/plugins/jstree/dist/jstree.js" type="text/javascript"></script>
+
+
+    <script src="../assets/global/scripts/app.js" type="text/javascript"></script>
+
+
+    <script src="../assets/pages/scripts/dashboard.min.js" type="text/javascript"></script>
+
+    <script src="../assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
+    <script src="../assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+
+
+
+    <script type="text/javascript" src="~/Theme/layer/layer.js"></script>
+
+ 
+
+    <script type="text/javascript" src="~/Theme/js/jquery.imgareaselect.pack.js"></script>
+    <script type="text/javascript" src="~/Theme/js/head.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="/theme/webuploader/webuploader.css" />
+    <script type="text/javascript" src="/theme/webuploader/webuploader.min.js"></script>
+    <script type="text/javascript" src="/theme/webuploader/webuploader.withoutimage.min.js"></script>
+
+    <script type="text/javascript" src="~/Theme/js/common.js"></script>
+
+    <style type="text/css">
+        .page-content-white .page-title {
+            margin-top: 0;
+        }
+    </style>
+</head>
+
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-md page-footer-fixed">
+   
+    <div class="page-header navbar navbar-fixed-top">
+      
+        <div class="page-header-inner ">
+        
+            <div class="page-logo">
+                @*<a href="../">
+                       <span>图书管理系统后台</span>
+                        <img src="../assets/layouts/layout/img/logo.png" alt="logo" class="logo-default" />
+                    </a>*@
+                <div class="menu-toggler sidebar-toggler">
+                    <span></span>
+                </div>
+            </div>
+           
+            <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                <span></span>
+            </a>
+           
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                   
+                    <li class="dropdown dropdown-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <img alt="" class="img-circle" id="myinfo-headimg" src="@(RWUtility.FormatResUrl(Utility.GetLoginUserInfo().HeadImg, ResFileType.UserIcon28x28))" />
+                            <span class="username username-hide-on-mobile" id="myinfo-nickname"> @Utility.GetLoginUserInfo().NickName </span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            <li>
+                                <a href="#" id="myinfo-nickname" onclick="_user.detail(this,'@Utility.GetLoginUserKey()')">
+                                    <i class="icon-user"></i> 我的信息
+                                </a>
+                                <a class="btn btn-circle btn-default tooltips" data-toggle="modal" data-target="#user-detail-div" style="display: none;" data-original-title="" title=""></a>
+                            </li>
+                            <li>
+                                <a href="#" onclick="_.changepwd();">
+                                    <i class="icon-user"></i> 修改密码
+                                </a>
+                            </li>
+
+                           
+                        </ul>
+                    </li>
+                   
+                    <li class="dropdown" style="width:50px">
+                        <a href="/home/logout" class="dropdown-toggle" title="退出">
+                            <i class="icon-logout"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+      
+    </div>
+  
+    <div class="clearfix"> </div>
+  
+    <div class="page-container">
+       
+        <div class="page-sidebar-wrapper">
+         
+            <div class="page-sidebar navbar-collapse collapse">
+               
+                <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+                    <li class="sidebar-toggler-wrapper hide">
+                        <div class="sidebar-toggler">
+                            <span></span>
+                        </div>
+                    </li>
+                    @{
+                        Dictionary<MenuEntity, List<MenuEntity>> menuDict = MenuConfig.Current.getMenuDict();
+                        foreach (MenuEntity MainMenu in menuDict.Keys)
+                        {
+                            List<MenuEntity> subMenuList = MenuConfig.Current.getMenuDict()[MainMenu];
+
+                            <li class="nav-item start @(MainMenu.Key == CurrentMainMenuKey ? "active open" : "")">
+                                <a href="@(subMenuList.Count==0?MainMenu.Url:"")" class="nav-link nav-toggle">
+                                    <i class="icon-home"></i>
+                                    <span class="title">@MainMenu.Title</span>
+                                    <span class="selected"></span>
+                                    @if (subMenuList.Count > 0)
+                                    {
+                                        <span class="arrow @(CurrentMainMenuKey == MainMenu.Key ? "open" : "")"></span>
+                                    }
+                                </a>
+                                @if (subMenuList.Count > 0)
+                                {
+                                    <ul class="sub-menu">
+                                        @foreach (MenuEntity SubMenu in subMenuList)
+                                        {
+                                            <li class="nav-item start @(SubMenu.Key == CurrentSubMenuKey ? "active open" : "")">
+                                                <a href="@SubMenu.Url" class="nav-link ">
+                                                    <i class="icon-bar-chart"></i>
+                                                    <span class="title">
+                                                        @SubMenu.Title
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <div class="page-footer">
+        <div class="page-footer-inner">
+            2016 &copy; OSeage.
+
+        </div>
+        <div class="scroll-to-top">
+            <i class="icon-arrow-up"></i>
+        </div>
+    </div>
+</body>
+</html>
+
+
+@*用户详情区域*@
+<div class="modal fade" id="user-detail-div">
+
+</div>

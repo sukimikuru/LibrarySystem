@@ -1,0 +1,251 @@
+﻿@using LibrarySystem.Entities
+@{
+    ResEntity resInfo = ViewData["resInfo"] as ResEntity;
+}
+
+<style type="text/css">
+    .doc_up_area {
+        margin: 0 auto;
+        height: 200px;
+        border: 1px dashed #00a6ea;
+        text-align: center;
+        line-height: 24px;
+        border-radius: 3px;
+        background: url("../../Theme/img/up_bj.png") no-repeat 10% center #f9f9f9;
+    }
+
+        .doc_up_area .up_btn {
+            margin: 45px 0 0 225px;
+        }
+
+        .doc_up_area span {
+            color: #38B496;
+        }
+
+    .doc_up_list { /*border:1px solid #d9d9d9;*/
+        border-radius: 0 0 3px 3px;
+        overflow-y: auto;
+        margin-top: 20px;
+    }
+
+        .doc_up_list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+            .doc_up_list ul li {
+                height: 80px;
+                border-bottom: 1px solid #d9d9d9;
+            }
+
+                .doc_up_list ul li:last-child {
+                    border: none;
+                }
+
+        .doc_up_list .mc {
+            height: 30px;
+            line-height: 30px;
+            color: #6E7A81;
+        }
+
+            .doc_up_list .mc .title {
+                width: 340px;
+                overflow: hidden;
+                display: block;
+                float: left;
+                height: 30px;
+                line-height: 30px;
+            }
+
+            .doc_up_list .mc .gb, .doc_up_list .mc .zt, .doc_up_list .mc .sc {
+                width: 11px;
+                height: 11px;
+                margin: 10px 15px 0 15px;
+            }
+
+            .doc_up_list .mc .gb {
+                background: url("../../Theme/img/up_gb.png") no-repeat;
+            }
+
+            .doc_up_list .mc .zt {
+                background: url("../../Theme/img/up_zt.png") no-repeat;
+            }
+
+            .doc_up_list .mc .sc {
+                background: url("../../Theme/img/up_sc.png") no-repeat;
+            }
+
+        .doc_up_list .scjdt {
+            background: url("../../Theme/img/up_jdt.png") no-repeat;
+            height: 20px;
+            width: 513px;
+        }
+
+            .doc_up_list .scjdt .jd {
+                background: #38B696;
+                height: 20px;
+                border-radius: 1px;
+            }
+
+        .doc_up_list .sd {
+            line-height: 35px;
+            color: #999;
+        }
+
+            .doc_up_list .sd span {
+                margin-right: 10px;
+            }
+
+            .doc_up_list .sd label {
+                vertical-align: inherit;
+            }
+
+    .fr {
+        float: right;
+    }
+
+
+    #attachment {
+        list-style: none;
+        padding: 0;
+    }
+
+        #attachment .mc {
+            height: 30px;
+            line-height: 30px;
+            color: #6E7A81;
+        }
+
+            #attachment .mc .title {
+                width: 340px;
+                overflow: hidden;
+                display: block;
+                float: left;
+                height: 30px;
+                line-height: 30px;
+            }
+
+            #attachment .mc .gb, #attachment .mc .zt, #attachment .mc .sc {
+                width: 11px;
+                height: 11px;
+                margin: 10px 15px 0 15px;
+            }
+
+            #attachment .mc .gb {
+                background: url("../../Theme/img/up_gb.png") no-repeat;
+            }
+
+        #attachment .sd {
+            line-height: 35px;
+            color: #999;
+        }
+
+            #attachment .sd span {
+                margin-right: 10px;
+            }
+
+            #attachment .sd label {
+                vertical-align: inherit;
+            }
+
+        #attachment li {
+            height: 65px;
+            /*border-bottom: 1px solid #d9d9d9;*/
+        }
+</style>
+
+<input type="hidden" class="row_key" value="@resInfo.RowKey" />
+<div class="modal-dialog modal-lg">
+    <div class="modal-content c-square">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title bold uppercase font-white">white</h4>
+        </div>
+        <div class="modal-body form-horizontal">
+            <form role="form">
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="inputWarning">名称</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" placeholder="请输入资源名称。" id="name" value="@resInfo.Name">
+                            <span class="help-block"> Something may have gone wrong </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="inputWarning">说明</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" placeholder="" id="note" value="@resInfo.Note">
+                            <span class="help-block"> Something may have gone wrong </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="inputWarning">类型</label>
+                        <div class="col-md-8">
+                            <select class="form-control" id="res_type" onchange="res.changeType()">
+                                @foreach (EnumMappingAttribute ema in EnumHelper.GetMappingList<ResType>())
+                                {
+                                    <option value="@ema.DBCode" @(resInfo.Type == ema.DBCode ? "selected" : "")>@ema.DisplayName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="upload-div" style="@(resInfo.Type==ResType.Web.GetDBCode()?"display:none":"")">
+                        <label class="control-label col-md-2" for="inputWarning">附件</label>
+                        <div class="col-md-8">
+                            <div class="doc_up_area">
+                                <div class="up_btn">
+                                    <span id="file_count" style="color: #333;">没有上传文件</span><br />
+                                    请点击<span>选择文件</span><br />
+                                    <div id="picker">选择文件</div>
+                                </div>
+                            </div>
+                            <!--选择文档后的上传列表-->
+                            <div class="doc_up_list col-xs-22" style="display:none">
+                                <ul></ul>
+                            </div>
+                            <input type="hidden" id="upload_infos" value="" />
+                            <input type="hidden" id="exist_infos" value="@resInfo.Path" />
+                            <div class="doc_exist_list">
+                                <span style="font-size:20px;top: 30px;position: relative;display:@(string.IsNullOrEmpty(resInfo.Path) || resInfo.Type == ResType.Web.GetDBCode() ? "none" : "")">已有附件:</span>
+                                <ul id="attachment" style="position: relative;top: 30px;">
+                                    @if (!string.IsNullOrEmpty(resInfo.Path) && resInfo.Type != ResType.Web.GetDBCode())
+                                    {
+
+                                    <li>
+                                        <input type="hidden" value="@resInfo.Path" />
+                                        <div class="mc">
+                                            <span class="title">@(resInfo.Path.Split('|')[0])</span>
+                                            <a href="javascript:;" class="gb fr" onclick="res.delPath(this)"></a>
+
+                                        </div>
+                                        <div class="sd">
+                                            <span> @(resInfo.Path.Split('|')[1])</span>
+                                        </div>
+                                    </li>
+
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="path-div" style="@(resInfo.Type==ResType.Web.GetDBCode()?"":"display:none")">
+                        <label class="control-label col-md-2" for="inputWarning">地址</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" placeholder="请输入资源地址。" id="web_path" value="@(resInfo.Type==ResType.Web.GetDBCode()?resInfo.Path:"")">
+                            <span class="help-block"> Something may have gone wrong </span>
+                        </div>
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn green btn-outline" id="saveAddRes" onclick="res.saveRes(this)">保存</button>
+            <button type="button" class="btn btn-outline dark sbold uppercase" data-dismiss="modal" id="cancelSaveAddRes">取消</button>
+        </div>
+    </div>
+</div>

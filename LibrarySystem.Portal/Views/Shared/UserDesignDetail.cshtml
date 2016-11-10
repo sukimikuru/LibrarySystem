@@ -1,0 +1,251 @@
+﻿@using LibrarySystem.Entities;
+@using LibrarySystem.ResWeb;
+@{
+    UserEntity userInfo = ViewData["userInfo"] as UserEntity;
+    string type = ViewData["type"] as string;  //1修改用户信息，2修改自己信息
+}
+
+<style type="text/css">
+    .user_headimg #user_head_show_box {
+        width: 200px;
+        height: 200px;
+        line-height: 200px;
+        text-align: center;
+        background: gray none no-repeat scroll 0 0;
+        position: relative;
+        display: none;
+    }
+
+        .user_headimg #user_head_show_box a {
+            position: absolute;
+            z-index: 5555;
+            display: block;
+            width: 80px;
+            height: 25px;
+            line-height: 25px;
+            bottom: -35px;
+            left: 60px;
+            background: #ccc;
+            color: #fff;
+            border-radius: 3px;
+        }
+
+    .fl {
+        float: left;
+    }
+
+    #user_head_upload_box {
+        width: 200px;
+        height: 200px;
+        background: url("../../Theme/img/sc_bj.png") no-repeat;
+        background-size: cover;
+        text-align: center;
+        position: relative;
+    }
+
+        #user_head_upload_box span {
+            display: block;
+            margin-top: 130px;
+            color: #B3B3B3;
+        }
+
+        #user_head_upload_box a {
+            display: block;
+            background: url("../../Theme/img/up_btn.png") no-repeat;
+            width: 101px;
+            height: 27px;
+            line-height: 27px;
+            text-align: center;
+            color: #B3B3B3;
+            margin: 5px auto;
+        }
+
+    .filebtn {
+        cursor: pointer;
+        height: 27px;
+        left: 47px;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        position: absolute;
+        width: 101px;
+        top: 155px;
+    }
+
+    .upimgbox {
+        border: 5px solid #fff;
+        border-radius: 5px;
+        box-shadow: 1px 1px 3px #ccc;
+        margin-bottom: 8px;
+        overflow: hidden;
+    }
+
+    .head_1 {
+        height: 130px;
+        width: 130px;
+    }
+
+    .head_2 {
+        height: 104px;
+        width: 104px;
+    }
+
+    .head_3 {
+        height: 58px;
+        width: 58px;
+    }
+
+    .head_4 {
+        height: 38px;
+        width: 38px;
+    }
+
+    .sc120, .sc100, .sc50, .sc120, .sc94, .sc48, .sc28 {
+        margin-left: 30px;
+        color: #B3B3B3;
+    }
+
+    .imgareaselect-border1 {
+        background: rgba(0, 0, 0, 0) url("../../Theme/img/border-anim-v.gif") repeat-y scroll left top;
+    }
+
+    .imgareaselect-border2 {
+        background: rgba(0, 0, 0, 0) url("../../Theme/img/border-anim-h.gif") repeat-x scroll left top;
+    }
+
+    .imgareaselect-border3 {
+        background: rgba(0, 0, 0, 0) url("../../Theme/img/border-anim-v.gif") repeat-y scroll right top;
+    }
+
+    .imgareaselect-border4 {
+        background: rgba(0, 0, 0, 0) url("../../Theme/img/border-anim-h.gif") repeat-x scroll left bottom;
+    }
+
+    .imgareaselect-border1, .imgareaselect-border2, .imgareaselect-border3, .imgareaselect-border4 {
+        opacity: 0.5;
+    }
+
+    .imgareaselect-handle {
+        background-color: #fff;
+        border: 1px solid #000;
+        opacity: 0.5;
+    }
+
+    .imgareaselect-outer {
+        background-color: #000;
+        opacity: 0.5;
+    }
+</style>
+
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content c-square">
+        <div class="modal-header">
+            <button type="button" class="close close-user-detail" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title bold uppercase font-white">white</h4>
+        </div>
+        <div class="modal-body form-horizontal">
+            <form role="form" id="user_form" method="post" enctype="multipart/form-data" action="/user/saveUserInfo">
+                <input type="hidden" id="isIE" name="isIE" value="0" />
+                <input type="hidden" id="row_key" name="row_key" value="@userInfo.RowKey" />
+                <input type="hidden" id="depart_key" name="depart_key" value="0" />
+                <input type="hidden" id="type" name="type" value="@(type)" />
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="control-label col-md-3" for="inputWarning">登录名</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="请输入登录名，由字母开头，可加数字和下划线，4-20位字符组成。" id="login_name" name="login_name" value="@userInfo.LoginName" @(userInfo.RowKey > 0 ? "readonly" : "")>
+                            <span class="help-block"> Something may have gone wrong </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3" for="inputWarning">昵称</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="请输入昵称" id="nick_name" name="nick_name" value="@userInfo.NickName">
+                            <span class="help-block"> Something may have gone wrong </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3" for="inputWarning">性别</label>
+                        <div class="col-md-6">
+                            <select class="form-control" id="sex" name="sex">
+                                @foreach (EnumMappingAttribute ema in EnumHelper.GetMappingList<SexType>())
+                                {
+                                    <option value="@ema.DBCode" @(userInfo.Sex == ema.DBCode ? "selected" : "")>@ema.DisplayName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    @if (type == "1")
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="inputWarning">角色</label>
+                            <div class="col-md-6">
+                                <select class="form-control" id="role" name="role">
+                                    @foreach (EnumMappingAttribute ema in EnumHelper.GetMappingList<RoleKind>())
+                                    {
+                                        <option value="@ema.DBCode" @(userInfo.Role == ema.DBCode ? "selected" : "")>@ema.DisplayName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    <div class="form-group">
+                        <label class="control-label col-md-3" for="inputWarning">联系电话</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="phone" name="phone" value="@userInfo.Phone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3" for="inputWarning">头像</label>
+                        <div class="col-md-9">
+                            <div class="user_headimg">
+                                <input id="headimg" name="headFileName" type="hidden" value="">
+                                <input data-val="true" data-val-number="字段 x 必须是一个数字。" data-val-required="x 字段是必需的。" id="head_x" name="x" type="hidden" value="">
+                                <input data-val="true" data-val-number="字段 y 必须是一个数字。" data-val-required="y 字段是必需的。" id="head_y" name="y" type="hidden" value="">
+                                <input data-val="true" data-val-number="字段 width 必须是一个数字。" data-val-required="width 字段是必需的。" id="head_width" name="width" type="hidden" value="">
+                                <input data-val="true" data-val-number="字段 height 必须是一个数字。" data-val-required="height 字段是必需的。" id="head_height" name="height" type="hidden" value="">
+                                <div class="fl">
+                                    <div class="sc fl" id="user_head_upload_box">
+                                        <span>选择你要上传的头像(&lt;150KB)</span>
+                                        <a href="javascript:;">选择头像</a>
+                                        <input accept=".jpg,.jpeg,.png,.gif,.bmp" type="file" id="loadFile" name="loadFile" class="filebtn" onchange="_user.readURL(this);">
+                                    </div>
+                                    <div id="user_head_show_box" class="sc fl">
+                                        <img id="user_head_origin" style="vertical-align: middle;">
+                                        <a href="javascript:cancelHead();" class="cancel_btn fl">取消选择</a>
+                                    </div>
+
+                                    <div class="sc-list fl">
+                                        <div class="sc94 fl">
+                                            <div class="upimgbox head_2">
+                                                <input type="hidden" id="img94x94" value="@(RWUtility.FormatResUrl(userInfo.HeadImg, ResFileType.UserIcon94x94))">
+                                                <img src="@(RWUtility.FormatResUrl(userInfo.HeadImg, ResFileType.UserIcon94x94))" id="headimg_94">
+                                            </div>
+                                            <span>94x94像素</span>
+                                        </div>
+                                     
+                                        <div class="sc28 fl">
+                                            <div class="upimgbox head_4">
+                                                <input type="hidden" id="img28x28" value="@(RWUtility.FormatResUrl(userInfo.HeadImg, ResFileType.UserIcon28x28))">
+                                                <img src="@(RWUtility.FormatResUrl(userInfo.HeadImg, ResFileType.UserIcon28x28))" id="headimg_28">
+                                            </div>
+                                            <span>28x28像素</span>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn green btn-outline" id="saveAddRes" onclick="@(type=="1"?"user.saveUser(this)":"_user.saveUser(this)")">保存</button>
+            <button type="button" class="btn btn-outline dark sbold uppercase close-user-detail" data-dismiss="modal" id="cancelSaveAddRes">取消</button>
+        </div>
+    </div>
+</div>

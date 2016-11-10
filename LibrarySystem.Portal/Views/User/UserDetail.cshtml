@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "~/_LAYOUTS/Master/Pop.cshtml";
+    ViewData["MainMenu"] = "User";
+    ViewData["SubMenu"] = "";
+}
+
+
+
+<div class="row">
+
+    <div class="col-md-12 ">
+        <div class="portlet light bordered" style="border: none!important;box-shadow :none!important;">
+
+            <div class="portlet-body form">
+                <form class="form-horizontal" role="form">
+                    <div class="form-body">
+                        <div class="alert alert-danger display-hide">
+                            <button class="close" data-close="alert"></button> You have some form errors. Please check below.
+                        </div>
+                        <div class="alert alert-success display-hide">
+                            <button class="close" data-close="alert"></button> Your form validation is successful!
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-3 control-label" for="form_control_1">
+                                Name
+                                <span class="required" aria-required="true">*</span>
+                            </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" placeholder="" name="name">
+                                <div class="form-control-focus"> </div>
+                                <span class="help-block">@*enter your full name*@</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">性别</label>
+                            <div class="col-md-9">
+                                <select class="form-control">
+                                    <option value="1">男</option>
+                                    <option value="2">女</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
