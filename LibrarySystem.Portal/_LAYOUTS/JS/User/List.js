@@ -47,7 +47,7 @@
 
             "lengthMenu": [
                 [5, 15, 20, -1],
-                [5, 15, 20, "All"] // change per page values here
+                [5, 15, 20, "全部"] // change per page values here
             ],
             // set the initial value
             "pageLength": 5,
