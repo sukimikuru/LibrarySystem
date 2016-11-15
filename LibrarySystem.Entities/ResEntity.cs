@@ -4,28 +4,33 @@ using System.Data;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Diagnostics;
+using System.Runtime.Serialization;
+
 namespace LibrarySystem.Entities
 {
-	/// <summary>
-	/// 
-	/// </summary>
-  [Table(Name = "tbl_res")]
-  public partial class ResEntity : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-  {
-
-    private long _RowKey;
     /// <summary>
     /// 
     /// </summary>
-    [Column(Storage = "_RowKey", Name = "row_key", DbType = "bigint", AutoSync = AutoSync.Never, IsPrimaryKey = true)]
-    [DebuggerNonUserCode()]
-    public long RowKey 
-    { 
-	    get { return this._RowKey; } 
-	    set
-	    {
-       if (((_RowKey == value)
-                            == false))
+    [Serializable]
+    [DataContract]
+    [Table(Name = "tbl_res")]
+    public partial class ResEntity : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+    {
+
+        private long _RowKey;
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataMember]
+        [Column(Storage = "_RowKey", Name = "row_key", DbType = "bigint", AutoSync = AutoSync.Never, IsPrimaryKey = true)]
+        [DebuggerNonUserCode()]
+        public long RowKey
+        {
+            get { return this._RowKey; }
+            set
+            {
+                if (((_RowKey == value)
+                                     == false))
                 {
                     this.OnRowKeyChanging(value);
                     this.SendPropertyChanging();
@@ -33,27 +38,28 @@ namespace LibrarySystem.Entities
                     this.SendPropertyChanged("RowKey");
                     this.OnRowKeyChanged();
                 }
-	    }
-    }
-    
-       partial void OnRowKeyChanged();
+            }
+        }
+
+        partial void OnRowKeyChanged();
 
         partial void OnRowKeyChanging(long value);
 
 
-    private long _DepartKey;
-    /// <summary>
-    /// 
-    /// </summary>
-    [Column(Storage = "_DepartKey", Name = "depart_key", DbType = "bigint", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
-    [DebuggerNonUserCode()]
-    public long DepartKey 
-    { 
-	    get { return this._DepartKey; } 
-	    set
-	    {
-       if (((_DepartKey == value)
-                            == false))
+        private long _DepartKey;
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataMember]
+        [Column(Storage = "_DepartKey", Name = "depart_key", DbType = "bigint", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
+        [DebuggerNonUserCode()]
+        public long DepartKey
+        {
+            get { return this._DepartKey; }
+            set
+            {
+                if (((_DepartKey == value)
+                                     == false))
                 {
                     this.OnDepartKeyChanging(value);
                     this.SendPropertyChanging();
@@ -61,27 +67,28 @@ namespace LibrarySystem.Entities
                     this.SendPropertyChanged("DepartKey");
                     this.OnDepartKeyChanged();
                 }
-	    }
-    }
-    
-       partial void OnDepartKeyChanged();
+            }
+        }
+
+        partial void OnDepartKeyChanged();
 
         partial void OnDepartKeyChanging(long value);
 
 
-    private String _Type;
-    /// <summary>
-    /// 
-    /// </summary>
-    [Column(Storage = "_Type", Name = "type", DbType = "nvarchar", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
-    [DebuggerNonUserCode()]
-    public String Type 
-    { 
-	    get { return this._Type; } 
-	    set
-	    {
-       if (((_Type == value)
-                            == false))
+        private String _Type;
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataMember]
+        [Column(Storage = "_Type", Name = "type", DbType = "nvarchar", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
+        [DebuggerNonUserCode()]
+        public String Type
+        {
+            get { return this._Type; }
+            set
+            {
+                if (((_Type == value)
+                                     == false))
                 {
                     this.OnTypeChanging(value);
                     this.SendPropertyChanging();
@@ -89,27 +96,28 @@ namespace LibrarySystem.Entities
                     this.SendPropertyChanged("Type");
                     this.OnTypeChanged();
                 }
-	    }
-    }
-    
-       partial void OnTypeChanged();
+            }
+        }
+
+        partial void OnTypeChanged();
 
         partial void OnTypeChanging(String value);
 
 
-    private String _Path;
-    /// <summary>
-    /// 
-    /// </summary>
-    [Column(Storage = "_Path", Name = "path", DbType = "nvarchar", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
-    [DebuggerNonUserCode()]
-    public String Path 
-    { 
-	    get { return this._Path; } 
-	    set
-	    {
-       if (((_Path == value)
-                            == false))
+        private String _Path;
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataMember]
+        [Column(Storage = "_Path", Name = "path", DbType = "nvarchar", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
+        [DebuggerNonUserCode()]
+        public String Path
+        {
+            get { return this._Path; }
+            set
+            {
+                if (((_Path == value)
+                                     == false))
                 {
                     this.OnPathChanging(value);
                     this.SendPropertyChanging();
@@ -117,27 +125,28 @@ namespace LibrarySystem.Entities
                     this.SendPropertyChanged("Path");
                     this.OnPathChanged();
                 }
-	    }
-    }
-    
-       partial void OnPathChanged();
+            }
+        }
+
+        partial void OnPathChanged();
 
         partial void OnPathChanging(String value);
 
 
-    private String _Name;
-    /// <summary>
-    /// 
-    /// </summary>
-    [Column(Storage = "_Name", Name = "name", DbType = "nvarchar", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
-    [DebuggerNonUserCode()]
-    public String Name 
-    { 
-	    get { return this._Name; } 
-	    set
-	    {
-       if (((_Name == value)
-                            == false))
+        private String _Name;
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataMember]
+        [Column(Storage = "_Name", Name = "name", DbType = "nvarchar", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
+        [DebuggerNonUserCode()]
+        public String Name
+        {
+            get { return this._Name; }
+            set
+            {
+                if (((_Name == value)
+                                     == false))
                 {
                     this.OnNameChanging(value);
                     this.SendPropertyChanging();
@@ -145,27 +154,28 @@ namespace LibrarySystem.Entities
                     this.SendPropertyChanged("Name");
                     this.OnNameChanged();
                 }
-	    }
-    }
-    
-       partial void OnNameChanged();
+            }
+        }
+
+        partial void OnNameChanged();
 
         partial void OnNameChanging(String value);
 
 
-    private String _Note;
-    /// <summary>
-    /// 
-    /// </summary>
-    [Column(Storage = "_Note", Name = "note", DbType = "nvarchar", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
-    [DebuggerNonUserCode()]
-    public String Note 
-    { 
-	    get { return this._Note; } 
-	    set
-	    {
-       if (((_Note == value)
-                            == false))
+        private String _Note;
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataMember]
+        [Column(Storage = "_Note", Name = "note", DbType = "nvarchar", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
+        [DebuggerNonUserCode()]
+        public String Note
+        {
+            get { return this._Note; }
+            set
+            {
+                if (((_Note == value)
+                                     == false))
                 {
                     this.OnNoteChanging(value);
                     this.SendPropertyChanging();
@@ -173,27 +183,28 @@ namespace LibrarySystem.Entities
                     this.SendPropertyChanged("Note");
                     this.OnNoteChanged();
                 }
-	    }
-    }
-    
-       partial void OnNoteChanged();
+            }
+        }
+
+        partial void OnNoteChanged();
 
         partial void OnNoteChanging(String value);
 
 
-    private long _Creator;
-    /// <summary>
-    /// 
-    /// </summary>
-    [Column(Storage = "_Creator", Name = "creator", DbType = "bigint", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
-    [DebuggerNonUserCode()]
-    public long Creator 
-    { 
-	    get { return this._Creator; } 
-	    set
-	    {
-       if (((_Creator == value)
-                            == false))
+        private long _Creator;
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataMember]
+        [Column(Storage = "_Creator", Name = "creator", DbType = "bigint", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
+        [DebuggerNonUserCode()]
+        public long Creator
+        {
+            get { return this._Creator; }
+            set
+            {
+                if (((_Creator == value)
+                                     == false))
                 {
                     this.OnCreatorChanging(value);
                     this.SendPropertyChanging();
@@ -201,27 +212,28 @@ namespace LibrarySystem.Entities
                     this.SendPropertyChanged("Creator");
                     this.OnCreatorChanged();
                 }
-	    }
-    }
-    
-       partial void OnCreatorChanged();
+            }
+        }
+
+        partial void OnCreatorChanged();
 
         partial void OnCreatorChanging(long value);
 
 
-    private DateTime _CreateTime;
-    /// <summary>
-    /// 
-    /// </summary>
-    [Column(Storage = "_CreateTime", Name = "create_time", DbType = "datetime", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
-    [DebuggerNonUserCode()]
-    public DateTime CreateTime 
-    { 
-	    get { return this._CreateTime; } 
-	    set
-	    {
-       if (((_CreateTime == value)
-                            == false))
+        private DateTime _CreateTime;
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataMember]
+        [Column(Storage = "_CreateTime", Name = "create_time", DbType = "datetime", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
+        [DebuggerNonUserCode()]
+        public DateTime CreateTime
+        {
+            get { return this._CreateTime; }
+            set
+            {
+                if (((_CreateTime == value)
+                                     == false))
                 {
                     this.OnCreateTimeChanging(value);
                     this.SendPropertyChanging();
@@ -229,27 +241,28 @@ namespace LibrarySystem.Entities
                     this.SendPropertyChanged("CreateTime");
                     this.OnCreateTimeChanged();
                 }
-	    }
-    }
-    
-       partial void OnCreateTimeChanged();
+            }
+        }
+
+        partial void OnCreateTimeChanged();
 
         partial void OnCreateTimeChanging(DateTime value);
 
 
-    private long _Editor;
-    /// <summary>
-    /// 
-    /// </summary>
-    [Column(Storage = "_Editor", Name = "editor", DbType = "bigint", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
-    [DebuggerNonUserCode()]
-    public long Editor 
-    { 
-	    get { return this._Editor; } 
-	    set
-	    {
-       if (((_Editor == value)
-                            == false))
+        private long _Editor;
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataMember]
+        [Column(Storage = "_Editor", Name = "editor", DbType = "bigint", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
+        [DebuggerNonUserCode()]
+        public long Editor
+        {
+            get { return this._Editor; }
+            set
+            {
+                if (((_Editor == value)
+                                     == false))
                 {
                     this.OnEditorChanging(value);
                     this.SendPropertyChanging();
@@ -257,27 +270,28 @@ namespace LibrarySystem.Entities
                     this.SendPropertyChanged("Editor");
                     this.OnEditorChanged();
                 }
-	    }
-    }
-    
-       partial void OnEditorChanged();
+            }
+        }
+
+        partial void OnEditorChanged();
 
         partial void OnEditorChanging(long value);
 
 
-    private DateTime _UpdateTime;
-    /// <summary>
-    /// 
-    /// </summary>
-    [Column(Storage = "_UpdateTime", Name = "update_time", DbType = "datetime", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
-    [DebuggerNonUserCode()]
-    public DateTime UpdateTime 
-    { 
-	    get { return this._UpdateTime; } 
-	    set
-	    {
-       if (((_UpdateTime == value)
-                            == false))
+        private DateTime _UpdateTime;
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataMember]
+        [Column(Storage = "_UpdateTime", Name = "update_time", DbType = "datetime", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
+        [DebuggerNonUserCode()]
+        public DateTime UpdateTime
+        {
+            get { return this._UpdateTime; }
+            set
+            {
+                if (((_UpdateTime == value)
+                                     == false))
                 {
                     this.OnUpdateTimeChanging(value);
                     this.SendPropertyChanging();
@@ -285,27 +299,28 @@ namespace LibrarySystem.Entities
                     this.SendPropertyChanged("UpdateTime");
                     this.OnUpdateTimeChanged();
                 }
-	    }
-    }
-    
-       partial void OnUpdateTimeChanged();
+            }
+        }
+
+        partial void OnUpdateTimeChanged();
 
         partial void OnUpdateTimeChanging(DateTime value);
 
 
-    private Boolean _Status;
-    /// <summary>
-    /// 
-    /// </summary>
-    [Column(Storage = "_Status", Name = "status", DbType = "bit", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
-    [DebuggerNonUserCode()]
-    public Boolean Status 
-    { 
-	    get { return this._Status; } 
-	    set
-	    {
-       if (((_Status == value)
-                            == false))
+        private Boolean _Status;
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataMember]
+        [Column(Storage = "_Status", Name = "status", DbType = "bit", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
+        [DebuggerNonUserCode()]
+        public Boolean Status
+        {
+            get { return this._Status; }
+            set
+            {
+                if (((_Status == value)
+                                     == false))
                 {
                     this.OnStatusChanging(value);
                     this.SendPropertyChanging();
@@ -313,24 +328,24 @@ namespace LibrarySystem.Entities
                     this.SendPropertyChanged("Status");
                     this.OnStatusChanged();
                 }
-	    }
-    }
-    
-       partial void OnStatusChanged();
+            }
+        }
+
+        partial void OnStatusChanged();
 
         partial void OnStatusChanging(Boolean value);
 
 
- partial void OnCreated();
- 
-  public ResEntity()
+        partial void OnCreated();
+
+        public ResEntity()
         {
             this.OnCreated();
         }
 
-   private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
+        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
 
-   public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
+        public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
@@ -351,5 +366,5 @@ namespace LibrarySystem.Entities
                 h(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-  }
+    }
 }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Text;
 using LibrarySystem.Portal.Classes;
+using LibrarySystem.Common;
 using LibrarySystem.DAL;
 using LibrarySystem.Entities;
 using System.Data.SQLite;

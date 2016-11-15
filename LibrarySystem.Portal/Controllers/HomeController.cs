@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LibrarySystem.Portal.Classes;
+using LibrarySystem.Common;
 using LibrarySystem.Entities;
 using LibrarySystem.DAL;
 using LibrarySystem.ResWeb;
@@ -19,74 +20,6 @@ namespace LibrarySystem.Portal.Controllers
         #region 登录相关
         public ViewResult Login()
         {
-            //if (Utility.GetLoginUserKey() > 0)
-            //{
-            //    //设置跳转
-            //    string returnUrl = Request["ReturnUrl"];
-            //    if (!string.IsNullOrEmpty(returnUrl))
-            //        returnUrl = HttpUtility.UrlDecode(returnUrl);
-            //    if (!string.IsNullOrEmpty(returnUrl))
-            //    {
-            //        Utility.Redirect(Response, returnUrl);
-            //    }
-            //    else
-            //    {
-            //        if (Utility.GetLoginUserRoleKind() == RoleKind.TH)
-            //        {
-            //            Utility.Redirect(Response, "/th/perbk/add");
-            //        }
-            //        else if (Utility.GetLoginUserRoleKind() == RoleKind.SY)
-            //        {
-            //            Utility.Redirect(Response, "/sys/userman/list");
-            //        }
-            //        else if (Utility.GetLoginUserRoleKind() == RoleKind.ST)
-            //        {
-            //            Utility.Redirect(Response, "/st/myreport/list");
-            //        }
-            //        else if (Utility.GetLoginUserRoleKind() == RoleKind.TW)
-            //        {
-            //            Utility.Redirect(Response, "/thm/lessonaudit/list");
-            //        }
-            //        else
-            //        {
-            //            List<MenuInfo> globalList = RightConfig.Current.GetGlobalMenu(Utility.GetLoginUserRoleKind().GetDBCode());
-            //            Utility.Redirect(Response, globalList[0].Url);
-            //        }
-
-            //    }
-            //    return View();
-            //}
-            //string user_name = string.Empty;
-            //string password = string.Empty;
-            //long remberKey = Utility.GetRemberMeUserKey();
-            //if (remberKey > 0)
-            //{
-            //    UserInfoEntity userInfo = Utility.GetUserInfoFromDB(remberKey);
-            //    string msg = string.Empty;
-            //    if (Login(userInfo.LoginName, password, out msg) == 1)
-            //    {
-            //        //设置跳转
-            //        string returnUrl = Request["ReturnUrl"];
-            //        if (!string.IsNullOrEmpty(returnUrl))
-            //            returnUrl = HttpUtility.UrlDecode(returnUrl);
-
-            //        if (!string.IsNullOrEmpty(returnUrl))
-            //        {
-            //            Utility.Redirect(Response, returnUrl);
-            //        }
-            //        else
-            //        {
-            //            if (Utility.GetLoginUserRoleKind() == RoleKind.TH)
-            //            {
-            //                Utility.Redirect(Response, "/th/perbk/add");
-            //            }
-            //            else if (Utility.GetLoginUserRoleKind() == RoleKind.SY)
-            //            {
-            //                Utility.Redirect(Response, "/sys/userman/list");
-            //            }
-            //        }
-            //    }
-            //}
             return View();
         }
 

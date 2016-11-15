@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Text;
 using LibrarySystem.DAL;
 using LibrarySystem.Portal.Classes;
+using LibrarySystem.Common;
 using LibrarySystem.Entities;
 namespace LibrarySystem.Portal.Controllers
 {

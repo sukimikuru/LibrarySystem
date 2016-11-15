@@ -1,0 +1,165 @@
+﻿<Window x:Class="LibrarySystem.Client.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibrarySystem.Client"
+        mc:Ignorable="d"
+        Title="Login" Height="500" Width="350"  WindowStyle="None">
+    <Window.Resources>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle Fill="#FFEA4848" HorizontalAlignment="Stretch" RadiusY="8" RadiusX="8" Stroke="#FFE6E6E6" Width="Auto"/>
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" Margin="0,12.38" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="TextBoxControlTemplate1" TargetType="{x:Type TextBox}">
+            <Grid Margin="0" Height="80" Width="260">
+                <Rectangle RadiusY="8" RadiusX="8" Height="Auto" VerticalAlignment="Stretch">
+                    <Rectangle.Stroke>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+                    </Rectangle.Stroke>
+                </Rectangle>
+                <ScrollViewer HorizontalAlignment="Left" Width="260" Height="40" VerticalAlignment="Top" Margin="0" BorderThickness="0,0,0,11"/>
+                <ScrollViewer HorizontalAlignment="Left" Width="260" Height="40" VerticalAlignment="Bottom"/>
+                <Path Data="M17.333333,114.334 L233.83367,113.834" Height="1.5" Margin="0,0,0,38.5" Stretch="Fill" VerticalAlignment="Bottom" Width="260">
+                    <Path.Stroke>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+                    </Path.Stroke>
+                </Path>
+            </Grid>
+        </ControlTemplate>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <Style x:Key="toolBtn" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="grid" Height="Auto" HorizontalAlignment="Left" Width="Auto" Margin="0">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="Center" Margin="8" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" OpacityMask="#FFDADADA" d:LayoutOverrides="Width, Height"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="PasswordBoxControlTemplate1" TargetType="{x:Type PasswordBox}">
+            <Grid>
+                <Rectangle HorizontalAlignment="Right" Stroke="#FFC7C7C7" Margin="0,0,0,1" Width="260" RadiusX="8" RadiusY="8"/>
+                <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Margin="31.19,1,1,1" d:LayoutOverrides="Height" Foreground="{x:Null}"/>
+                <Label x:Name="serach_btn" Content="&#xF023;" FontFamily="pack://application:,,,/Resources/#FontAwesome" HorizontalAlignment="Left" Margin="4.19,5.266,0,2.5" VerticalAlignment="Stretch"  Cursor="Hand" Foreground="#FFEA4848" Width="22" Height="22" FontSize="16"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False"/>
+                <Trigger Property="IsMouseOver" Value="True"/>
+                <Trigger Property="IsKeyboardFocused" Value="True"/>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid>
+        <Button x:Name="loginBtn" Content="登录" Margin="0,330,0,0" VerticalAlignment="Top" Height="40" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="loginBtn_Click" Width="260" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox x:Name="usernameBox"  Margin="0,200,0,0" RenderTransformOrigin="0.5,0.5" Style="{DynamicResource SearchTextBox}" Height="40"  BorderBrush="White" VerticalAlignment="Top" FontSize="15" VerticalContentAlignment="Center" Width="260">
+            <TextBox.Resources>
+
+                <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+                <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+                <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+                <Style x:Key="SearchTextBox" TargetType="{x:Type TextBox}">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                    <Setter Property="AllowDrop" Value="true"/>
+                    <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+                    <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TextBox}">
+                                <Grid Margin="0" Height="Auto" Width="260">
+                                    <Rectangle Height="Auto" Margin="0" VerticalAlignment="Stretch" RadiusY="8" RadiusX="8" Width="260" Stroke="#FFC7C7C7"/>
+                                    <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Margin="28,0,5,0" HorizontalAlignment="Stretch" Width="Auto" Height="35" VerticalAlignment="Center" FontSize="15" VerticalContentAlignment="Center"/>
+                                    <Label x:Name="serach_btn" Content="&#xF007;" FontFamily="pack://application:,,,/Resources/#FontAwesome" HorizontalAlignment="Left" Margin="4.19,5.266,0,2.5" VerticalAlignment="Stretch"  Cursor="Hand" Foreground="#FFEA4848" Width="22" Height="22" FontSize="16"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsEnabled" Value="false"/>
+                                    <Trigger Property="IsMouseOver" Value="true"/>
+                                    <Trigger Property="IsKeyboardFocused" Value="true"/>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Resources>
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <Image x:Name="image" Height="100" VerticalAlignment="Top" Margin="121,66,121,0" Source="图书.png"/>
+        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Center" VerticalAlignment="Top" Width="260" Height="40" Margin="0,250,0,0" Template="{DynamicResource PasswordBoxControlTemplate1}" VerticalContentAlignment="Center"/>
+        <Button x:Name="btnClose" Content="&#xF00D;" FontFamily="pack://application:,,,/Resources/#FontAwesome" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Style="{DynamicResource toolBtn}" FontSize="18" Click="btnClose_Click" Foreground="#FFBBBBBB" ToolTip="关闭" Cursor="Hand"/>
+        <Label x:Name="label_msg" Content="Label" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,295,42,0" Foreground="Red"/>
+
+    </Grid>
+</Window>

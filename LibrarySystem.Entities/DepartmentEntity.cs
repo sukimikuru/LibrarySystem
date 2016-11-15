@@ -4,11 +4,15 @@ using System.Data;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Diagnostics;
+using System.Runtime.Serialization;
+
 namespace LibrarySystem.Entities
 {
     /// <summary>
     /// 
     /// </summary>
+    [Serializable]
+    [DataContract]
     [Table(Name = "tbl_department")]
     public partial class DepartmentEntity : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
     {
@@ -17,6 +21,7 @@ namespace LibrarySystem.Entities
         /// <summary>
         /// 
         /// </summary>
+        [DataMember]
         [Column(Storage = "_RowKey", Name = "row_key", DbType = "bigint", AutoSync = AutoSync.Never, IsPrimaryKey = true)]
         [DebuggerNonUserCode()]
         public long RowKey
@@ -45,6 +50,7 @@ namespace LibrarySystem.Entities
         /// <summary>
         /// 
         /// </summary>
+        [DataMember]
         [Column(Storage = "_Parent", Name = "parent", DbType = "bigint", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
         [DebuggerNonUserCode()]
         public long Parent
@@ -73,6 +79,7 @@ namespace LibrarySystem.Entities
         /// <summary>
         /// 
         /// </summary>
+        [DataMember]
         [Column(Storage = "_Level", Name = "level", DbType = "int", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
         [DebuggerNonUserCode()]
         public Int32 Level
@@ -101,6 +108,7 @@ namespace LibrarySystem.Entities
         /// <summary>
         /// 
         /// </summary>
+        [DataMember]
         [Column(Storage = "_Name", Name = "name", DbType = "nvarchar", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
         [DebuggerNonUserCode()]
         public String Name
@@ -129,6 +137,7 @@ namespace LibrarySystem.Entities
         /// <summary>
         /// 
         /// </summary>
+        [DataMember]
         [Column(Storage = "_Note", Name = "note", DbType = "nvarchar", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
         [DebuggerNonUserCode()]
         public String Note
@@ -157,6 +166,7 @@ namespace LibrarySystem.Entities
         /// <summary>
         /// 
         /// </summary>
+        [DataMember]
         [Column(Storage = "_Sort", Name = "sort", DbType = "nvarchar", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
         [DebuggerNonUserCode()]
         public String Sort
@@ -185,6 +195,7 @@ namespace LibrarySystem.Entities
         /// <summary>
         /// 
         /// </summary>
+        [DataMember]
         [Column(Storage = "_Creator", Name = "creator", DbType = "bigint", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
         [DebuggerNonUserCode()]
         public long Creator
@@ -213,6 +224,7 @@ namespace LibrarySystem.Entities
         /// <summary>
         /// 
         /// </summary>
+        [DataMember]
         [Column(Storage = "_CreateTime", Name = "create_time", DbType = "datetime", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
         [DebuggerNonUserCode()]
         public DateTime CreateTime
@@ -241,6 +253,7 @@ namespace LibrarySystem.Entities
         /// <summary>
         /// 
         /// </summary>
+        [DataMember]
         [Column(Storage = "_Editor", Name = "editor", DbType = "bigint", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
         [DebuggerNonUserCode()]
         public long Editor
@@ -269,6 +282,7 @@ namespace LibrarySystem.Entities
         /// <summary>
         /// 
         /// </summary>
+        [DataMember]
         [Column(Storage = "_UpdateTime", Name = "update_time", DbType = "datetime", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
         [DebuggerNonUserCode()]
         public DateTime UpdateTime
@@ -297,6 +311,7 @@ namespace LibrarySystem.Entities
         /// <summary>
         /// 
         /// </summary>
+        [DataMember]
         [Column(Storage = "_Status", Name = "status", DbType = "bit", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
         [DebuggerNonUserCode()]
         public Boolean Status

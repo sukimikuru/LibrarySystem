@@ -1,0 +1,224 @@
+﻿<Window x:Class="LibrarySystem.Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibrarySystem.Client"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized" WindowStyle="None">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="toolBtn" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="grid" Height="Auto" HorizontalAlignment="Left" Width="Auto" Margin="0">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="Center" Margin="8" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" OpacityMask="#FFDADADA" d:LayoutOverrides="Width, Height"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Storyboard x:Key="btnCloseEnter">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="btnClose">
+                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="btnCloseLeave">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="btnClose">
+                <EasingColorKeyFrame KeyTime="0" Value="#FFBBBBBB"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="btnSettingEnter">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="btnSetting">
+                <EasingColorKeyFrame KeyTime="0" Value="White"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="btnSettingLeave">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="btnSetting">
+                <EasingColorKeyFrame KeyTime="0" Value="#FFBBBBBB"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Style x:Key="imgBtn" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Height="Auto">
+                            <Image x:Name="image" Margin="5,5,5,15" Width="50" Height="50">
+                                <Image.OpacityMask>
+                                    <ImageBrush/>
+                                </Image.OpacityMask>
+                            </Image>
+                            <ContentPresenter VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true"/>
+                            <Trigger Property="IsMouseOver" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Storyboard x:Key="btnBookShellEnter">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="btnBookShell">
+                <EasingColorKeyFrame KeyTime="0" Value="#FFA40C0C"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="btnBookShellLeave">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="btnBookShell">
+                <EasingColorKeyFrame KeyTime="0" Value="#FFDC1919"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="btnLibraryEnter">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="btnLibrary">
+                <EasingColorKeyFrame KeyTime="0" Value="#FFA40C0C"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="btnLiraryLeave">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="btnLibrary">
+                <EasingColorKeyFrame KeyTime="0" Value="#FFDC1919"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="UIElement.MouseMove" SourceName="btnClose">
+            <BeginStoryboard x:Name="btnCloseEnter_BeginStoryboard" Storyboard="{StaticResource btnCloseEnter}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="btnClose">
+            <BeginStoryboard x:Name="btnCloseLeave_BeginStoryboard" Storyboard="{StaticResource btnCloseLeave}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="btnSetting">
+            <BeginStoryboard x:Name="btnSettingEnter_BeginStoryboard" Storyboard="{StaticResource btnSettingEnter}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="btnSetting">
+            <BeginStoryboard x:Name="btnSettingLeave_BeginStoryboard" Storyboard="{StaticResource btnSettingLeave}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="btnLibrary"/>
+        <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="btnLibrary"/>
+        <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="btnBookShell"/>
+        <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="btnBookShell"/>
+    </Window.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="932"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="head" Margin="0,0,-3,0" Background="#FFDC1919" Grid.ColumnSpan="2">
+            <Button x:Name="btnClose" Content="&#xf00d;" FontFamily="pack://application:,,,/Resources/#FontAwesome" HorizontalAlignment="Right" Margin="0,10,14,0" VerticalAlignment="Top" Style="{DynamicResource toolBtn}" FontSize="22" Click="btnClose_Click" Foreground="#FFBBBBBB" ToolTip="关闭" Cursor="Hand"/>
+            <Button x:Name="btnSetting" Content="&#xf013;" FontFamily="pack://application:,,,/Resources/#FontAwesome" HorizontalAlignment="Right" Margin="0,10,52,0" VerticalAlignment="Top" Style="{DynamicResource toolBtn}" FontSize="22" Background="Gainsboro" Foreground="#FFBBBBBB" ToolTip="设置" Cursor="Hand"/>
+            <Grid x:Name="imgBtnGroup" Margin="180,0,332.333,0">
+                <Grid Tag="bookshell" x:Name="btnBookShell" Background="#FFDC1919" Cursor="Hand" Width="120" HorizontalAlignment="Left" d:LayoutOverrides="Width" MouseDown="imgBtnCheck">
+                    <Image x:Name="image1" Margin="4,5,4,20.24" Source="书架.png" Width="55" OpacityMask="{x:Null}"/>
+                    <Label x:Name="label1" Content="我的书架" VerticalAlignment="Bottom" Foreground="White" d:LayoutOverrides="Width" Margin="0,0,0,3" HorizontalAlignment="Center"/>
+
+                </Grid>
+                <Grid Tag="library" x:Name="btnLibrary" Margin="120,0,0,0" Background="#FFDC1919" Cursor="Hand" MouseDown="imgBtnCheck" Width="120" HorizontalAlignment="Left">
+                    <Image x:Name="image" Margin="4,5,4,20.24" Source="图书.png" Width="70" OpacityMask="{x:Null}"/>
+                    <Label x:Name="label" Content="图书馆" VerticalAlignment="Bottom" Foreground="White" d:LayoutOverrides="Width" Margin="0,0,0,3" HorizontalAlignment="Center"/>
+
+                </Grid>
+            </Grid>
+            <TextBox x:Name="searchTextBox" Margin="0,0,207.333,24.496" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" Style="{DynamicResource SearchTextBox}" HorizontalAlignment="Right" Height="23" VerticalAlignment="Bottom" Width="120" GotFocus="searchTextBox_GotFocus" LostFocus="searchTextBox_LostFocus" BorderBrush="White" CaretBrush="White">
+                <TextBox.Resources>
+
+                    <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+                    <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+                    <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+                    <Style x:Key="SearchTextBox" TargetType="{x:Type TextBox}">
+                        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                        <Setter Property="AllowDrop" Value="true"/>
+                        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+                        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type TextBox}">
+                                    <Grid Margin="0,0,-191.333,-10" Height="30">
+                                        <Rectangle Fill="#FFAE1212" Height="Auto" Margin="0" VerticalAlignment="Stretch" RadiusY="14.167" RadiusX="14.167"/>
+                                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Margin="22.332,8.666,31,-3.666" HorizontalAlignment="Stretch" Width="Auto" Height="25"/>
+                                        <Label x:Name="serach_btn" Content="&#xF002;" FontFamily="pack://application:,,,/Resources/#FontAwesome" HorizontalAlignment="Right" Margin="0,5.566,9.856,2.2" VerticalAlignment="Stretch" d:LayoutOverrides="Height" MouseDown="serach_btn_MouseDown" Cursor="Hand" Foreground="White"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsEnabled" Value="false"/>
+                                        <Trigger Property="IsMouseOver" Value="true"/>
+                                        <Trigger Property="IsKeyboardFocused" Value="true"/>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBox.RenderTransform>
+            </TextBox>
+            <Grid x:Name="headImg" HorizontalAlignment="Left" Margin="30,26,0,26" Width="120" Cursor="Hand" MouseDown="headImg_MouseDown">
+                <Ellipse HorizontalAlignment="Left" Width="48" Stroke="#FFE6E6E6">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="头像2.png"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label x:Name="label2" Content="点击登录" HorizontalAlignment="Right" Margin="0,10.317,2,12.442" d:LayoutOverrides="Height" Foreground="White"/>
+            </Grid>
+        </Grid>
+        <UserControl x:Name="mainContent" Grid.Column="1" Grid.Row="1"/>
+        <Grid x:Name="foot" Grid.Row="2" Height="40" d:LayoutOverrides="VerticalAlignment" Background="#FFEAEAEA" Grid.ColumnSpan="2"/>
+        <UserControl x:Name="leftContent" Grid.Row="1"/>
+
+    </Grid>
+</Window>
