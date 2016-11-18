@@ -61,7 +61,8 @@ namespace LibrarySystem.ResWeb
         {
             get
             {
-                string host = HttpContext.Current.Request.Url.Host.ToLower() + "_prefix";
+                string host = "1" + "_prefix";
+                //string host = HttpContext.Current.Request.Url.Host.ToLower() + "_prefix";
                 if (UrlDict.ContainsKey(host))
                 {
                     return UrlDict[host];

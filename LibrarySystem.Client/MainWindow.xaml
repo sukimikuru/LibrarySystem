@@ -1,9 +1,10 @@
-﻿<Window x:Class="LibrarySystem.Client.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibrarySystem.Client"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="LibrarySystem.Client.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized" WindowStyle="None">
     <Window.Resources>
@@ -119,6 +120,28 @@
                 <EasingColorKeyFrame KeyTime="0" Value="#FFDC1919"/>
             </ColorAnimationUsingKeyFrames>
         </Storyboard>
+
+        <ControlTemplate x:Key="ListBoxControlTemplate1" TargetType="{x:Type ListBox}">
+            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="True">
+                <ScrollViewer Focusable="False" Padding="{TemplateBinding Padding}" Margin="0">
+                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="80,0"/>
+                </ScrollViewer>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" TargetName="Bd" Value="White"/>
+                    <Setter Property="BorderBrush" TargetName="Bd" Value="#FFD9D9D9"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsGrouping" Value="True"/>
+
+                    </MultiTrigger.Conditions>
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+                </MultiTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="UIElement.MouseMove" SourceName="btnClose">
@@ -138,27 +161,27 @@
         <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="btnBookShell"/>
         <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="btnBookShell"/>
     </Window.Triggers>
-    <Grid>
+    <Grid Width="1920" Height="1080">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180"/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="1700"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="932"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="850"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid x:Name="head" Margin="0,0,-3,0" Background="#FFDC1919" Grid.ColumnSpan="2">
-            <Button x:Name="btnClose" Content="&#xf00d;" FontFamily="pack://application:,,,/Resources/#FontAwesome" HorizontalAlignment="Right" Margin="0,10,14,0" VerticalAlignment="Top" Style="{DynamicResource toolBtn}" FontSize="22" Click="btnClose_Click" Foreground="#FFBBBBBB" ToolTip="关闭" Cursor="Hand"/>
-            <Button x:Name="btnSetting" Content="&#xf013;" FontFamily="pack://application:,,,/Resources/#FontAwesome" HorizontalAlignment="Right" Margin="0,10,52,0" VerticalAlignment="Top" Style="{DynamicResource toolBtn}" FontSize="22" Background="Gainsboro" Foreground="#FFBBBBBB" ToolTip="设置" Cursor="Hand"/>
+            <Button x:Name="btnClose" Content="&#xF00D;" FontFamily="pack://application:,,,/Resources/#FontAwesome" HorizontalAlignment="Right" Margin="0,10,14,0" VerticalAlignment="Top" Style="{DynamicResource toolBtn}" FontSize="22" Click="btnClose_Click" Foreground="#FFBBBBBB" ToolTip="关闭" Cursor="Hand"/>
+            <Button x:Name="btnSetting" Content="&#xF013;" FontFamily="pack://application:,,,/Resources/#FontAwesome" HorizontalAlignment="Right" Margin="0,10,52,0" VerticalAlignment="Top" Style="{DynamicResource toolBtn}" FontSize="22" Background="Gainsboro" Foreground="#FFBBBBBB" ToolTip="设置" Cursor="Hand"/>
             <Grid x:Name="imgBtnGroup" Margin="180,0,332.333,0">
                 <Grid Tag="bookshell" x:Name="btnBookShell" Background="#FFDC1919" Cursor="Hand" Width="120" HorizontalAlignment="Left" d:LayoutOverrides="Width" MouseDown="imgBtnCheck">
-                    <Image x:Name="image1" Margin="4,5,4,20.24" Source="书架.png" Width="55" OpacityMask="{x:Null}"/>
+                    <Image x:Name="image1" Margin="4,5,4,20.24" Source="Resources/书架.png" Width="55" OpacityMask="{x:Null}"/>
                     <Label x:Name="label1" Content="我的书架" VerticalAlignment="Bottom" Foreground="White" d:LayoutOverrides="Width" Margin="0,0,0,3" HorizontalAlignment="Center"/>
 
                 </Grid>
                 <Grid Tag="library" x:Name="btnLibrary" Margin="120,0,0,0" Background="#FFDC1919" Cursor="Hand" MouseDown="imgBtnCheck" Width="120" HorizontalAlignment="Left">
-                    <Image x:Name="image" Margin="4,5,4,20.24" Source="图书.png" Width="70" OpacityMask="{x:Null}"/>
+                    <Image x:Name="image" Margin="4,5,4,20.24" Source="Resources/图书.png" Width="70" OpacityMask="{x:Null}"/>
                     <Label x:Name="label" Content="图书馆" VerticalAlignment="Bottom" Foreground="White" d:LayoutOverrides="Width" Margin="0,0,0,3" HorizontalAlignment="Center"/>
 
                 </Grid>
@@ -207,18 +230,63 @@
                     </TransformGroup>
                 </TextBox.RenderTransform>
             </TextBox>
-            <Grid x:Name="headImg" HorizontalAlignment="Left" Margin="30,26,0,26" Width="120" Cursor="Hand" MouseDown="headImg_MouseDown">
-                <Ellipse HorizontalAlignment="Left" Width="48" Stroke="#FFE6E6E6">
+            <Grid x:Name="headImg" HorizontalAlignment="Left" Margin="32,26,0,26" Width="120" Cursor="Hand" MouseDown="headImg_MouseDown">
+                <Ellipse x:Name="headImgFill" HorizontalAlignment="Left" Width="48" Stroke="#FFE6E6E6">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="头像2.png"/>
+                        <ImageBrush ImageSource="Resources/头像2.png"/>
                     </Ellipse.Fill>
                 </Ellipse>
-                <Label x:Name="label2" Content="点击登录" HorizontalAlignment="Right" Margin="0,10.317,2,12.442" d:LayoutOverrides="Height" Foreground="White"/>
+                <Label x:Name="userNameLabel" Content="点击登录" HorizontalAlignment="Right" Margin="0,10.317,2,12.442" d:LayoutOverrides="Height" Foreground="White"/>
             </Grid>
         </Grid>
-        <UserControl x:Name="mainContent" Grid.Column="1" Grid.Row="1"/>
-        <Grid x:Name="foot" Grid.Row="2" Height="40" d:LayoutOverrides="VerticalAlignment" Background="#FFEAEAEA" Grid.ColumnSpan="2"/>
-        <UserControl x:Name="leftContent" Grid.Row="1"/>
+        <UserControl x:Name="mainContent" Grid.Column="1" Grid.Row="1" Width="1700" Height="850" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <UserControl.Background>
+                <ImageBrush ImageSource="shell_bg.png">
+                    <ImageBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
+            </UserControl.Background>
+            <ListBox ItemsSource="{Binding Images}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="1700" HorizontalAlignment="Right" Height="780" VerticalAlignment="Top" Template="{DynamicResource ListBoxControlTemplate1}" BorderThickness="1" BorderBrush="{x:Null}" Margin="0,70,0,0" RenderTransformOrigin="0.5,0.5" >
+                <ListBox.Background>
+                    <ImageBrush Stretch="None">
+                        <ImageBrush.RelativeTransform>
+                            <TransformGroup>
+                               
+                            </TransformGroup>
+                        </ImageBrush.RelativeTransform>
+                    </ImageBrush>
+                </ListBox.Background>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid MouseUp="Grid_MouseUp" >
+                            <local:WaitingProgress Margin="0"/>
+                            <Image Stretch="Fill" Width="125" Height="140" local:ImageDecoder.Source="{Binding}" Margin="5,15,5,20" />
+                            <Label x:Name="title" Content="Label" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel x:Name="wrapPanel" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </UserControl>
+        <UserControl x:Name="leftContent" Grid.Row="1">
+            <ListView x:Name="listView" BorderBrush="#FF1C2C47" BorderThickness="0,0,1,0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </UserControl>
 
     </Grid>
 </Window>

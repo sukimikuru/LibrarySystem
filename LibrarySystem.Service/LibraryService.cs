@@ -49,7 +49,6 @@ namespace LibrarySystem.Service
             userInfo = new UserEntity();
             try
             {
-                System.Threading.Thread.Sleep(2000);
 
                 UserEntity user = new UserEntity();
                 user.LoginName = user_name;
@@ -126,6 +125,10 @@ namespace LibrarySystem.Service
             return x + y;
         }
 
+        public List<ResEntity> ResPagerList(int pageIndex, int pageSize, Func<ResEntity, bool> wh, params string[] ob)
+        {
+            return db.PageList<ResEntity>(pageIndex, pageSize, wh, ob);
 
+        }
     }
 }

@@ -34,7 +34,9 @@ namespace LibrarySystem.Service
         int add(int x, int y);
 
 
-
+        [OperationContract]
+        List<ResEntity> ResPagerList(int pageIndex, int pageSize, Func<ResEntity, bool> wh, params string[] ob);
+       
 
     }
 }

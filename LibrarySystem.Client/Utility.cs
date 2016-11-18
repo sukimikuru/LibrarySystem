@@ -8,6 +8,6 @@ namespace LibrarySystem.Client
     public class Utility
     {
 
-        public static LibraryService.UserEntity LoginUserInfo { set; get; }
+        
     }
 }

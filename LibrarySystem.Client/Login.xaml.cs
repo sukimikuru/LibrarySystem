@@ -73,22 +73,31 @@ namespace LibrarySystem.Client
             {
                 string msg = "";
                 LibraryService.UserEntity userInfo = new LibraryService.UserEntity();
-                
 
-                
+
+
                 bool log_result = false;
 
                 LibraryService.ILibrary _service = new LibraryService.LibraryClient();
-                
-                log_result = _service.LoginSys(out msg, out userInfo, (logUser as LibraryService.UserEntity).LoginName, (logUser as LibraryService.UserEntity).Pwd);
-                
+
+                try
+                {
+                    log_result = _service.LoginSys(out msg, out userInfo, (logUser as LibraryService.UserEntity).LoginName, (logUser as LibraryService.UserEntity).Pwd);
+                }
+                catch (Exception ex)
+                {
+                    msg = "无法连接服务器!";
+                }
+
+
+
                 this.Dispatcher.BeginInvoke((Action)delegate ()
                 {
                     loginBtn.Content = "登录";
 
                     if (log_result)
                     {
-                        Utility.LoginUserInfo = userInfo;
+                        CommonConfig.Current.LoginUserInfo = userInfo;
                         this.DialogResult = true;
                         this.Close();
                     }

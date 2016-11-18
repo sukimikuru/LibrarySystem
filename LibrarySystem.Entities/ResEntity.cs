@@ -191,6 +191,35 @@ namespace LibrarySystem.Entities
         partial void OnNoteChanging(String value);
 
 
+        private String _Img;
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataMember]
+        [Column(Storage = "_Img", Name = "img", DbType = "nvarchar", AutoSync = AutoSync.Never, UpdateCheck = UpdateCheck.Never)]
+        [DebuggerNonUserCode()]
+        public String Img
+        {
+            get { return this._Img; }
+            set
+            {
+                if (((_Img == value)
+                                     == false))
+                {
+                    this.OnImgChanging(value);
+                    this.SendPropertyChanging();
+                    this._Img = value;
+                    this.SendPropertyChanged("Img");
+                    this.OnImgChanged();
+                }
+            }
+        }
+
+        partial void OnImgChanged();
+
+        partial void OnImgChanging(String value);
+
+
         private long _Creator;
         /// <summary>
         /// 

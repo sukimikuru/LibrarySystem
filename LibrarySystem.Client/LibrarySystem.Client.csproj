@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -54,8 +55,15 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="CommonConfig.cs" />
+    <Compile Include="ImageDecoder.cs" />
+    <Compile Include="ImageQueue.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainViewModel.cs" />
+    <Compile Include="ResDetail.xaml.cs">
+      <DependentUpon>ResDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Service References\LibraryService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -63,6 +71,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Utility.cs" />
+    <Compile Include="WaitingProgress.xaml.cs">
+      <DependentUpon>WaitingProgress.xaml</DependentUpon>
+    </Compile>
     <Page Include="Login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +90,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ResDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WaitingProgress.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -104,7 +123,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <Resource Include="Resources\FontAwesome.otf" />
+    <None Include="Service References\LibraryService\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LibraryService\LibrarySystem.Client.LibraryService.ResEntity.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\LibraryService\LibrarySystem.Client.LibraryService.UserEntity.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -118,15 +142,59 @@
     <None Include="Service References\LibraryService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\LibraryService\System.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Resource Include="Resources\FontAwesome.otf" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="书架.png" />
-    <Resource Include="图书.png" />
-    <Resource Include="头像.png" />
-    <Resource Include="头像2.png" />
+    <Resource Include="Resources\书架.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\图书.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\头像.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\头像2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibrarySystem.Entities\LibrarySystem.Entities.csproj">
+      <Project>{c39931bf-15bd-492c-a9a7-6b870d08e624}</Project>
+      <Name>LibrarySystem.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibrarySystem.ResWeb\LibrarySystem.ResWeb.csproj">
+      <Project>{f6ecef22-1f46-4fb0-b522-78975c40b512}</Project>
+      <Name>LibrarySystem.ResWeb</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="loading.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="list.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="shell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="sehllbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="shell_bg.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\LibraryService\" />
@@ -142,6 +210,13 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\book_img.png" />
+    <Resource Include="Resources\video_img.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="oceans.mp4" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

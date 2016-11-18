@@ -5,6 +5,8 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/LibrarySystem.Entities" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ILibrary_LoginSys_InputMessage">
@@ -25,6 +27,12 @@
   <wsdl:message name="ILibrary_add_OutputMessage">
     <wsdl:part name="parameters" element="tns:addResponse" />
   </wsdl:message>
+  <wsdl:message name="ILibrary_ResPagerList_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResPagerList" />
+  </wsdl:message>
+  <wsdl:message name="ILibrary_ResPagerList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResPagerListResponse" />
+  </wsdl:message>
   <wsdl:portType name="ILibrary">
     <wsdl:operation name="LoginSys">
       <wsdl:input wsaw:Action="http://tempuri.org/ILibrary/LoginSys" message="tns:ILibrary_LoginSys_InputMessage" />
@@ -37,6 +45,10 @@
     <wsdl:operation name="add">
       <wsdl:input wsaw:Action="http://tempuri.org/ILibrary/add" message="tns:ILibrary_add_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILibrary/addResponse" message="tns:ILibrary_add_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResPagerList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILibrary/ResPagerList" message="tns:ILibrary_ResPagerList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILibrary/ResPagerListResponse" message="tns:ILibrary_ResPagerList_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ILibrary" type="tns:ILibrary">
@@ -61,6 +73,15 @@
     </wsdl:operation>
     <wsdl:operation name="add">
       <soap:operation soapAction="http://tempuri.org/ILibrary/add" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResPagerList">
+      <soap:operation soapAction="http://tempuri.org/ILibrary/ResPagerList" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

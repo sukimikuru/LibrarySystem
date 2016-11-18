@@ -20,4 +20,27 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UserEntity" nillable="true" type="tns:UserEntity" />
+  <xs:complexType name="ArrayOfResEntity">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ResEntity" nillable="true" type="tns:ResEntity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfResEntity" nillable="true" type="tns:ArrayOfResEntity" />
+  <xs:complexType name="ResEntity">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Creator" type="xs:long" />
+      <xs:element minOccurs="0" name="DepartKey" type="xs:long" />
+      <xs:element minOccurs="0" name="Editor" type="xs:long" />
+      <xs:element minOccurs="0" name="Img" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Note" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Path" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RowKey" type="xs:long" />
+      <xs:element minOccurs="0" name="Status" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResEntity" nillable="true" type="tns:ResEntity" />
 </xs:schema>
